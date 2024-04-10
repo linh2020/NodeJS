@@ -10,6 +10,7 @@ const homeLogic = fs.readFileSync("./navbar-app/browser-app.js");
 const server = http.createServer((req, res) => {
   //
   const url = req.url;
+
   console.log(url);
 
   switch (url) {
