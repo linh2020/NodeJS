@@ -1,3 +1,4 @@
+const e = require("express");
 const express = require("express");
 
 const app = express();
@@ -28,7 +29,7 @@ let accounts = [
 ];
 
 app.get("/accounts", (req, res) => {
-  console.log(req.params);
+  console.log(req.method);
   res.json(accounts);
 });
 
@@ -41,6 +42,29 @@ app.get("/accounts/:id", (req, res) => {
     res.status(500).send("Account not found.");
   } else {
     res.json(getAccount);
+  }
+});
+
+app.post("/accounts", (req, res) => {
+  const incomingAccount = req.body;
+  accounts.push(incomingAccount);
+  res.json(accounts);
+});
+
+app.put("/accounts/:id", (req, res) => {
+  const accountId = Number(req.params.id);
+  const body = res.body;
+  const account = accounts.find((account) => account.id === accountId);
+  const index = accounts.indexOf(account);
+
+  if (!account) {
+    res.status(500).send("Account not found.");
+  } else {
+    const updatedAccount = { ...account, ...body };
+
+    account[index] = updatedAccount;
+
+    res.send(updatedAccount);
   }
 });
 
