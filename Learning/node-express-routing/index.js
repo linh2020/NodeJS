@@ -68,6 +68,18 @@ app.put("/accounts/:id", (req, res) => {
   }
 });
 
+app.delete("/accounts/:id", (req, res) => {
+  const accountId = Number(req.params.id);
+  const newAccounts = accounts.filter((account) => account.id != accountId);
+
+  if (!newAccounts) {
+    res.status(500).send("Account not found");
+  } else {
+    accounts = newAccounts;
+    res.send(accounts);
+  }
+});
+
 app.listen(5000, () =>
   console.log(`Express server currently running on port ${PORT}`)
 );
