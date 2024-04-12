@@ -19,6 +19,15 @@ app.get("/api/products", (req, res) => {
   res.json(newProducts);
 });
 
+// /:id
+app.get("/api/products/:id", (req, res) => {
+  //   console.log(req.params);
+  const productId = Number(req.params.id);
+  const product = products.find((product) => product.id === productId);
+
+  res.json(product);
+});
+
 app.listen(PORT, () =>
   console.log(`Express server is listening on port ${PORT}`)
 );
