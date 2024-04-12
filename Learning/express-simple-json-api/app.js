@@ -19,13 +19,20 @@ app.get("/api/products", (req, res) => {
   res.json(newProducts);
 });
 
-// /:id
-app.get("/api/products/:id", (req, res) => {
+// /:productID
+app.get("/api/products/:productID", (req, res) => {
   //   console.log(req.params);
-  const productId = Number(req.params.id);
-  const product = products.find((product) => product.id === productId);
+  const { productID } = req.params;
 
-  res.json(product);
+  const singleProduct = products.find(
+    (product) => product.id === Number(productID)
+  );
+
+  if (!singleProduct) {
+    return res.status(404).send("Product Does Not Exist");
+  }
+
+  return res.json(singleProduct);
 });
 
 app.listen(PORT, () =>
