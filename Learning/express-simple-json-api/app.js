@@ -12,12 +12,17 @@ const PORT = 5000;
 
 const { users } = require("./data.js");
 
+// static assets
+app.use(express.static("./methods-public"));
+
 app.get("/api/users", (req, res) => {
   res.status(200).json({
     success: true,
     data: users,
   });
 });
+
+app.post("/api/orders", (req, res) => {});
 
 app.listen(PORT, () =>
   console.log(`Express server is listening on port ${PORT}`)
