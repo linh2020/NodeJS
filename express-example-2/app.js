@@ -32,8 +32,9 @@ app.post("/api/people", (req, res) => {
 });
 
 app.post("/api/postman/people", (req, res) => {
-  const { name } = req.body;
-  if (!name) {
+  console.log(req.body);
+  const newUser = req.body;
+  if (!newUser) {
     return res
       .status(400)
       .json({ success: false, msg: "Please provide name value" });
@@ -41,7 +42,7 @@ app.post("/api/postman/people", (req, res) => {
   res.status(201).json({
     success: true,
     msg: "Form Submitted Successfully",
-    data: [...people, name],
+    data: [...people, newUser],
   });
 });
 
