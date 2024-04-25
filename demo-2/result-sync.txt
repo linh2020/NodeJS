@@ -1,0 +1,2 @@
+Write first, second into a new file: Hello this is first text file, Hello this is second text file..!
+      
