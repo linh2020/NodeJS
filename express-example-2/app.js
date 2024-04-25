@@ -56,6 +56,32 @@ app.post("/login", (req, res) => {
   res.status(401).send("Please Provide Credentials");
 });
 
+app.put("/api/people/:id", (req, res) => {
+  console.log(req.params);
+  console.log(req.body);
+  const { id } = req.params;
+  const { name } = req.body;
+
+  const person = people.find((person) => person.id === Number(id));
+
+  if (!person)
+    res.status(401).json({ success: false, msg: `no person with id ${id}` });
+
+  // const updatedPeople = people.map((person) =>
+  //   person.id === Number(id) ? (person.name = name) : person
+  // );
+
+  const updatedPeople = people.map((person) => {
+    if (person.id === Number(id)) {
+      person.name = name;
+    }
+    return person;
+    //
+  });
+
+  res.json({ success: true, data: updatedPeople });
+});
+
 app.listen(PORT, () =>
   console.log(`Express server is listening on port ${{ PORT }}`)
 );
