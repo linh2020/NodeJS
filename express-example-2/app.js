@@ -61,11 +61,12 @@ app.put("/api/people/:id", (req, res) => {
   console.log(req.body);
   const { id } = req.params;
   const { name } = req.body;
-
   const person = people.find((person) => person.id === Number(id));
 
   if (!person)
-    res.status(401).json({ success: false, msg: `no person with id ${id}` });
+    return res
+      .status(401)
+      .json({ success: false, msg: `no person with id ${id}` });
 
   // const updatedPeople = people.map((person) =>
   //   person.id === Number(id) ? (person.name = name) : person
@@ -80,6 +81,21 @@ app.put("/api/people/:id", (req, res) => {
   });
 
   res.json({ success: true, data: updatedPeople });
+});
+
+app.delete("/api/people/:id", (req, res) => {
+  const person = people.find((person) => person.id === Number(req.params.id));
+
+  if (!person)
+    return res
+      .status(401)
+      .json({ success: false, msg: `no person with id ${req.params.id}` });
+
+  const newPeople = people.filter(
+    (person) => person.id !== Number(req.params.id)
+  );
+
+  res.status(200).json({ success: true, data: newPeople });
 });
 
 app.listen(PORT, () =>
