@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 // parse json data
 app.use(express.json());
 
+// Routing
 // login router
 app.use("/login", authRouter);
 
