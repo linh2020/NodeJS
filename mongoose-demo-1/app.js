@@ -17,12 +17,11 @@ app.get("/", (req, res) => {
 });
 
 // mongodb+srv://[username:password@]host[/[defaultauthdb][?options]]
-// cluster: backenddb
-// database-name: CdevPhoneStore
-// mongodb+srv://cdevlinh:<password>@backenddb.yqclkwv.mongodb.net/[database-name]?retryWrites=true&w=majority&appName=BackendDB
+// cluster:
+// database-name:
 mongoose
   .connect(
-    "mongodb+srv://cdevlinh:pGVWDLIIvtpxoTJL@backenddb.yqclkwv.mongodb.net/CdevPhoneStore?retryWrites=true&w=majority&appName=BackendDB"
+    "mongodb+srv://[username:password@]host/[database-name]?retryWrites=true&w=majority&appName=BackendDB"
   )
   .then(() => {
     console.log("Connected to database!");
